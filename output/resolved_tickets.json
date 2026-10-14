@@ -1,0 +1,228 @@
+{
+  "run_date": "2026-10-13 (shop date 2026-08-31)",
+  "database": "data/campus_customs_new.db (reset from campus_customs.db on the board before the run)",
+  "starting_checking_balance": 3400.0,
+  "ending_checking_balance": 20.0,
+  "total_cash_out": 3380.0,
+  "tickets": [
+    {
+      "ticket_id": 101,
+      "subject": "Bulldog tee",
+      "requester": "Tauhid Zaman",
+      "final_status": "resolved",
+      "run_id": "20261014T020431-eab85c",
+      "summary": "Size S white tee was out of stock (0 on hand) and the reprint vendor, Bulldog Print Co, was blocked by overdue invoice 501 ($840). Accounting prepared the invoice payment and a 1-tee purchase order ($8). A human approved both in order, the vendor can now ship (expected arrival 2026-09-05), and a reply to Tauhid was drafted.",
+      "delegations": [
+        "boss -> inventory",
+        "boss -> accounting",
+        "boss -> customer_service"
+      ],
+      "agents": [
+        {
+          "agent": "boss",
+          "did": "Read the ticket, sent stock to Inventory, money to Accounting and the reply to Customer Service, then set awaiting_approval.",
+          "mcp_tools": [
+            "get_ticket",
+            "update_ticket_status"
+          ]
+        },
+        {
+          "agent": "inventory",
+          "did": "Found 0 on hand / shortfall 1 / $8 restock. Vendor 1 can't ship because invoice 501 ($840) is 3 days overdue. 5 lead days.",
+          "mcp_tools": [
+            "check_stock_and_pricing",
+            "list_vendors",
+            "check_vendor_invoices"
+          ]
+        },
+        {
+          "agent": "accounting",
+          "did": "Checking $3,400. Prepared invoice 501 ($840) and the dependent purchase order 1 x CC-TEE-WHITE S ($8). $2,552 left after both.",
+          "mcp_tools": [
+            "get_cash_balance",
+            "get_ticket",
+            "check_vendor_invoices",
+            "check_stock_and_pricing",
+            "get_shop_today"
+          ]
+        },
+        {
+          "agent": "customer_service",
+          "did": "Drafted an apology to Tauhid Zaman: out of stock, restock pending, no arrival date promised.",
+          "mcp_tools": [
+            "get_ticket"
+          ]
+        }
+      ],
+      "agents_not_needed": [
+        "facilities"
+      ],
+      "human_approvals": [
+        {
+          "approval_id": 1,
+          "kind": "invoice",
+          "prepared_by": "accounting",
+          "amount": 840.0,
+          "approved_by": "Talha Javed",
+          "status": "approved",
+          "decided_at": "2026-10-14T02:04:49.750207+00:00",
+          "payment_id": 1,
+          "checking_balance_after": 2560.0,
+          "invoice_id": 501
+        },
+        {
+          "approval_id": 2,
+          "kind": "purchase_order",
+          "prepared_by": "accounting",
+          "amount": 8.0,
+          "approved_by": "Talha Javed",
+          "status": "approved",
+          "decided_at": "2026-10-14T02:04:54.489560+00:00",
+          "payment_id": 2,
+          "checking_balance_after": 2552.0,
+          "vendor_id": 1,
+          "sku": "CC-TEE-WHITE",
+          "size": "S",
+          "qty": 1,
+          "note": "Locked on the board until approval 1 was paid."
+        }
+      ],
+      "cash_change": -848.0,
+      "tokens": 33375
+    },
+    {
+      "ticket_id": 102,
+      "subject": "Rent due",
+      "requester": "Elm City Properties",
+      "final_status": "resolved",
+      "run_id": "20261014T020507-92896e",
+      "summary": "Facilities confirmed lease 1 rent of $2,400 due 2026-09-02 (2 days away, not overdue) and handed off to Accounting, which checked the live balance ($2,552) and prepared the rent payment. A human approved it, and lease 1 next_due moved to 2026-10-02.",
+      "delegations": [
+        "boss -> facilities",
+        "facilities -> accounting"
+      ],
+      "agents": [
+        {
+          "agent": "boss",
+          "did": "Read the ticket, sent it to Facilities, set awaiting_approval once the rent was prepared.",
+          "mcp_tools": [
+            "get_ticket",
+            "update_ticket_status"
+          ]
+        },
+        {
+          "agent": "facilities",
+          "did": "Confirmed $2,400 due 2026-09-02 for the Chapel Street shop and asked Accounting to prepare the payment.",
+          "mcp_tools": [
+            "check_rent_due"
+          ]
+        },
+        {
+          "agent": "accounting",
+          "did": "Checking $2,552 covers the rent, leaving $152. Prepared the $2,400 rent payment.",
+          "mcp_tools": [
+            "get_cash_balance",
+            "check_rent_due"
+          ]
+        }
+      ],
+      "agents_not_needed": [
+        "inventory",
+        "customer_service"
+      ],
+      "human_approvals": [
+        {
+          "approval_id": 3,
+          "kind": "rent",
+          "prepared_by": "accounting",
+          "amount": 2400.0,
+          "approved_by": "Talha Javed",
+          "status": "approved",
+          "decided_at": "2026-10-14T02:05:58.721783+00:00",
+          "payment_id": 3,
+          "checking_balance_after": 152.0,
+          "lease_id": 1
+        }
+      ],
+      "cash_change": -2400.0,
+      "tokens": 20698
+    },
+    {
+      "ticket_id": 103,
+      "subject": "Bulk hoodie discount",
+      "requester": "Yale AI Club",
+      "final_status": "resolved",
+      "run_id": "20261014T020614-73fc47",
+      "summary": "8 of 20 navy size M hoodies were in stock (12 short). The vendor could ship because 501 was paid on #101. Accounting prepared a 12-unit purchase order ($264) but only $152 was left, so the Boss called it needs_human and flagged a discount conflict (10% vs 20%) between Accounting's two answers. The board blocked the full order. A human approved 6 units ($132), leaving $20. 14 of the 20 hoodies are covered, and the discount and draft still need a human decision.",
+      "delegations": [
+        "boss -> inventory",
+        "boss -> accounting",
+        "boss -> customer_service",
+        "customer_service -> accounting"
+      ],
+      "agents": [
+        {
+          "agent": "boss",
+          "did": "Delegated to Inventory, Accounting and Customer Service at once. Caught the $112 cash shortfall and the 10% vs 20% price conflict. Final call needs_human, ticket set to awaiting_approval.",
+          "mcp_tools": [
+            "get_ticket",
+            "update_ticket_status"
+          ]
+        },
+        {
+          "agent": "inventory",
+          "did": "8 on hand, 12 short, $264 restock. Bulldog Print Co can ship, 5 lead days.",
+          "mcp_tools": [
+            "check_stock_and_pricing",
+            "list_vendors"
+          ]
+        },
+        {
+          "agent": "accounting",
+          "did": "Called twice. For Customer Service it recommended 10% off ($52.20, $1,044 for 20). For the Boss it prepared a 12 x $22 = $264 purchase order, flagged it as $112 more than the $152 balance, and recommended 20% off ($46.40, $928 for 20).",
+          "mcp_tools": [
+            "get_cash_balance",
+            "get_ticket",
+            "check_stock_and_pricing",
+            "list_vendors"
+          ]
+        },
+        {
+          "agent": "customer_service",
+          "did": "Asked Accounting for a price, then drafted the offer to Yale AI Club at $52.20 each pending confirmation, 8 available now. No cost or margin mentioned.",
+          "mcp_tools": [
+            "get_ticket"
+          ]
+        }
+      ],
+      "agents_not_needed": [
+        "facilities"
+      ],
+      "human_approvals": [
+        {
+          "approval_id": 4,
+          "kind": "purchase_order",
+          "prepared_by": "accounting",
+          "amount": 132.0,
+          "approved_by": "Talha Javed",
+          "status": "approved",
+          "decided_at": "2026-10-14T02:07:56.512728+00:00",
+          "payment_id": 4,
+          "checking_balance_after": 20.0,
+          "vendor_id": 1,
+          "sku": "CC-HOOD-NAVY",
+          "size": "M",
+          "qty": 6,
+          "note": "Prepared as 12 units ($264.00). The board disabled Approve because checking ($152.00) couldn't cover it. A human lowered the quantity to 6 ($132.00), the most cash could cover."
+        }
+      ],
+      "open_items_for_a_human": [
+        "Pick one bulk price (Accounting's final call: 20% / $46.40, draft: 10% / $52.20) and update the draft before sending.",
+        "Draft should reflect 14 of 20 hoodies (8 in stock + 6 arriving 2026-09-05).",
+        "Source the last 6 hoodies ($132.00) once cash allows."
+      ],
+      "cash_change": -132.0,
+      "tokens": 40877
+    }
+  ]
+}

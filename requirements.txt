@@ -1,0 +1,7 @@
+# Python 3.11+
+fastmcp>=4.1          # MCP server (mcp_server/server.py) and MCP client (backend)
+pydantic-ai>=2.44     # agent team (backend/agents.py)
+pydantic>=2.7
+openai>=1.40          # Portkey is OpenAI-compatible
+fastapi>=0.115        # backend/main.py
+uvicorn[standard]>=0.30

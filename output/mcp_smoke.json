@@ -1,0 +1,89 @@
+{
+  "server": "campus-customs",
+  "config": ".mcp.json",
+  "database": "data/campus_customs_new.db",
+  "results": [
+    {
+      "ticket": 103,
+      "prompt": "Ticket 103: the Yale AI Club wants 20 CC-HOOD-NAVY hoodies in size M. Use the campus-customs MCP tool to check stock and pricing for this request, then summarize in one sentence.",
+      "tool_name": "check_stock_and_pricing",
+      "tool_input": {
+        "sku": "CC-HOOD-NAVY",
+        "size": "M",
+        "qty_needed": 20
+      },
+      "tool_output": {
+        "sku": "CC-HOOD-NAVY",
+        "name": "Basic Hoodie Big Yale",
+        "size": "M",
+        "location": "Aisle A",
+        "qty_on_hand": 8,
+        "qty_needed": 20,
+        "shortfall": 12,
+        "in_stock_for_request": false,
+        "pricing": {
+          "unit_cost": 22,
+          "list_price": 58,
+          "margin_per_unit": 36,
+          "margin_pct": 62.1,
+          "restock_cost_for_shortfall": 264
+        }
+      }
+    },
+    {
+      "ticket": 101,
+      "prompt": "Ticket 101 is linked to invoice 501. Use the campus-customs MCP tool to check the vendor on that invoice and whether it can ship, then summarize in one sentence.",
+      "tool_name": "check_vendor_invoices",
+      "tool_input": {
+        "invoice_id": 501
+      },
+      "tool_output": {
+        "today": "2026-08-31",
+        "vendor_id": 1,
+        "vendor_name": "Bulldog Print Co",
+        "specialty": "apparel reprint",
+        "lead_days": 5,
+        "open_invoices": [
+          {
+            "invoice_id": 501,
+            "amount": 840,
+            "due_date": "2026-08-28",
+            "status": "open",
+            "description": "Rush reprint CC-TEE-WHITE S",
+            "days_overdue": 3,
+            "is_overdue": true
+          }
+        ],
+        "total_open_amount": 840,
+        "can_ship": false
+      }
+    },
+    {
+      "ticket": 102,
+      "prompt": "Ticket 102 is a rent notice for lease 1. Use the campus-customs MCP tool to check when rent is due and whether cash covers it, then summarize in one sentence.",
+      "tool_name": "check_rent_due",
+      "tool_input": {
+        "lease_id": 1
+      },
+      "tool_output": {
+        "today": "2026-08-31",
+        "lease_id": 1,
+        "space_name": "Chapel Street shop",
+        "landlord": "Elm City Properties",
+        "monthly_rent": 2400,
+        "next_due": "2026-09-02",
+        "days_until_due": 2,
+        "is_overdue": false,
+        "cash_accounts": [
+          {
+            "name": "checking",
+            "balance": 3400,
+            "as_of": "2026-08-31",
+            "can_cover_rent": true,
+            "balance_after_rent": 1000
+          }
+        ]
+      }
+    }
+  ]
+}
