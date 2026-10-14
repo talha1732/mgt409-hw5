@@ -23,3 +23,6 @@ frontend/dist/
 output/*.lock
 output/*.tmp
 output/*.corrupt-*.json
+
+# Canvas upload (built from the repo with git archive)
+hw5.zip

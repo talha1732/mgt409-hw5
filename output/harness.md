@@ -65,10 +65,10 @@ Code: `backend/agents.py`, types in `backend/models.py`, audit in `backend/audit
 | Facilities | `facilities.md` | Lease, landlord, rent amount and due date. Gets the rent payment prepared by Accounting. | `get_ticket`, `get_shop_today`, `check_rent_due` | `AgentReport` |
 | Customer Service | `customer_service.md` | Drafts the reply to the customer or landlord using only facts other agents confirmed. Drafts stay on the board. | `get_ticket`, `check_stock_and_pricing` | `AgentReport` |
 
-**Delegation (full connectivity).** Every agent has a `delegate(to, task)` tool and can hand work to any other agent. A delegated agent shares the run's usage counter and audit log, and its report (with any prepared payments) comes back to the caller. Seen in the test runs:
+**Delegation (full connectivity).** Every agent has a `delegate(to, task)` tool and can hand work to any other agent. A delegated agent shares the run's usage counter and audit log, and its report (with any prepared payments) comes back to the caller. Seen in the final (Problem 9) runs:
+- 101: Boss → Inventory, Boss → Accounting, Boss → Customer Service.
 - 102: Boss → Facilities → Accounting.
-- 101: Boss → Inventory, then Boss → Accounting and Boss → Customer Service.
-- 103: Boss → Inventory, Boss → Accounting, Boss → Customer Service. Customer Service then went to Accounting (for the price) and Inventory (for stock) itself.
+- 103: Boss → Inventory, Boss → Accounting, Boss → Customer Service. Customer Service then went to Accounting itself for a price.
 
 **Data models (`backend/models.py`).**
 

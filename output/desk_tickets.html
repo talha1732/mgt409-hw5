@@ -630,6 +630,14 @@ Hi Yale AI Club, Thanks for reaching out about 20 navy hoodies in size M. We can
       <div class="lesson"><b>What the comparison taught me:</b> my plan for #102 and the money on all three tickets were spot on. Where I was wrong was about <i>order</i>. I assumed the Boss would wait for Inventory before asking for prices. My Boss prompt lists who to use but never says "wait for the stock answer before pricing", so on #103 it ran everyone in parallel. Next time I'd put that order in the prompt.</div>
 
       <h4>3. How the agents handled payments and approvals (from the Cash tab)</h4>
+      <table>
+        <thead><tr><th>Ticket</th><th>Human approvals needed</th><th>What the human decided</th><th>Cash</th></tr></thead>
+        <tbody>
+          <tr><td>#101 Bulldog tee</td><td>2: #1 invoice 501 ($840.00, prepared by Accounting) and #2 purchase order 1 × CC-TEE-WHITE S ($8.00, locked behind #1)</td><td>Approved both, in order (#1, then #2)</td><td>$3,400.00 → $2,552.00</td></tr>
+          <tr><td>#102 Rent due</td><td>1: #3 rent for lease 1 ($2,400.00, prepared by Accounting through Facilities)</td><td>Approved</td><td>$2,552.00 → $152.00</td></tr>
+          <tr><td>#103 Bulk hoodies</td><td>1: #4 purchase order 12 × CC-HOOD-NAVY M ($264.00). The board blocked it at 12 because only $152.00 was left.</td><td>Approved a smaller order of <b>6 units ($132.00)</b> using the quantity slider. The discount price and draft are still open for a person to decide.</td><td>$152.00 → $20.00</td></tr>
+        </tbody>
+      </table>
       <ul>
         <li><b>Agents prepared, a human paid.</b> All 4 rows in <code>payments</code> say <code>approved_by = Talha Javed</code>. No agent can even see <code>pay_invoice</code>, <code>pay_rent</code> or <code>place_purchase_order</code>; those only run from the board's Approve button. Checking went $3,400.00 → $2,560.00 → $2,552.00 → $152.00 → $20.00, and that matches <code>cash_accounts</code>.</li>
         <li><b>Order mattered and the system enforced it.</b> On #101 the $8 tee order showed a 🔒 until invoice 501 was paid, because Bulldog Print Co won't ship with an open invoice.</li>
